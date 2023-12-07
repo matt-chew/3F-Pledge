@@ -31,10 +31,10 @@ public class LoginView {
         panel.add(box);
     }
 
-    public static void addButton (JPanel panel, JButton button, int x, int y, int width, int height, int sizeFont){
+    public static void addButton (JPanel panel, JButton button, int x, int y, int width, int height, int sizeFont, String color){
         button.setBounds(x,y,width,height);
         button.setFocusable(false);
-        button.setBackground(new Color(168,226,255));
+        button.setBackground(Color.decode(color));
         button.setFont(new Font("monospace",Font.PLAIN,sizeFont));
         button.setBorder(null);
         panel.add(button);
