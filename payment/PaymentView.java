@@ -1,4 +1,4 @@
-package pledge.payment;
+package payment;
 
 import java.awt.*;
 import javax.swing.*;

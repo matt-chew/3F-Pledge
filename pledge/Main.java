@@ -2,17 +2,18 @@ package pledge;
 
 import javax.swing.JFrame;
 
-import pledge.payment.*;
-import pledge.components.*;
+import payment.PaymentController;
+import components.Components;
 
-public class Main extends FrameView {
+
+public class Main extends Components {
 
 	public static void main(String[] args) {
-		display.setSize(700,600);
-		display.setLayout(null);
-		display.setLocationRelativeTo(null);
-		display.setResizable(false);
-		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setSize(700,600);
+		window.setLayout(null);
+		window.setLocationRelativeTo(null);
+		window.setResizable(false);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		new PaymentController();
 
