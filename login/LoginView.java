@@ -3,9 +3,9 @@ package login;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginView {
-
-    public static void addJTextField (JPanel panel, JTextField textField, int x, int y, int width, int height , int sizeText){
+class LoginView {
+    
+    static void addJTextField (JPanel panel, JTextField textField, int x, int y, int width, int height , int sizeText){
         textField.setBounds(x,y,width,height);
         textField.setFont(new Font("monospace", Font.PLAIN, sizeText));
         textField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
@@ -13,7 +13,7 @@ public class LoginView {
         panel.add(textField);
     }
 
-    public static void addPasswordField (JPanel panel, JPasswordField passwordField, int x, int y, int width, int height, int sizeText){
+    static void addPasswordField (JPanel panel, JPasswordField passwordField, int x, int y, int width, int height, int sizeText){
         passwordField.setBounds(x,y,width,height);
         passwordField.setFont(new Font("monospace", Font.PLAIN, sizeText));
         passwordField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
@@ -21,7 +21,7 @@ public class LoginView {
         panel.add(passwordField);
     }
 
-    public static void addCheckBox (JPanel panel, JCheckBox box, int x, int y){
+    static void addCheckBox (JPanel panel, JCheckBox box, int x, int y){
         box.setBounds(x,y,140,15);
         box.setText("Show Password");
         box.setFont(new Font("Monospace", Font.BOLD, 15));
@@ -31,16 +31,17 @@ public class LoginView {
         panel.add(box);
     }
 
-    public static void addButton (JPanel panel, JButton button, int x, int y, int width, int height, int sizeFont, String color){
+    static void addButton (JPanel panel, JButton button, int x, int y, int width, int height, int sizeFont, String color){
         button.setBounds(x,y,width,height);
         button.setFocusable(false);
+        button.setForeground(Color.decode("#FAF6F0"));
         button.setBackground(Color.decode(color));
         button.setFont(new Font("monospace",Font.PLAIN,sizeFont));
         button.setBorder(null);
         panel.add(button);
     }
 
-    public static void addLabel (JPanel panel, JLabel label, int x, int y, int width, int height, int sizeText, Boolean alignment, int font){
+    static void addLabel (JPanel panel, JLabel label, int x, int y, int width, int height, int sizeText, Boolean alignment, int font){
         label.setBounds(x,y, width,height);
         label.setFont(new Font("monospace", font, sizeText));
 
@@ -59,9 +60,15 @@ public class LoginView {
         frame.add(panel);
     }
 
-    public static void removeComponents (JFrame frame){
+    static void removeComponents (JFrame frame){
         frame.getContentPane().removeAll();
         frame.repaint();
         frame.revalidate();
+    }
+
+    static void removePanelComponents(JPanel panel){
+        panel.removeAll();
+        panel.repaint();
+        panel.revalidate();
     }
 }

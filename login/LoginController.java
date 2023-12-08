@@ -1,12 +1,15 @@
 package login;
 
 import components.Components;
+import register.RegisterController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class LoginController extends Components implements MouseListener {
+
+    private String password;
 
     JLabel loginLogo = new JLabel("LOGIN");
 
@@ -21,6 +24,8 @@ public class LoginController extends Components implements MouseListener {
     JButton loginBtn = new JButton("Login");
 
     JButton registerBtn = new JButton("Register");
+
+
 
     public LoginController (){
 
@@ -39,10 +44,10 @@ public class LoginController extends Components implements MouseListener {
         LoginView.addCheckBox(loginAndRegisterPanel, showPasswordCb, 50, 295);
         showPasswordCb.addMouseListener(this);
 
-        LoginView.addButton(loginAndRegisterPanel, loginBtn, 70, 360, 250, 40, 20, "#7cb9be");
+        LoginView.addButton(loginAndRegisterPanel, loginBtn, 70, 360, 250, 40, 20, "#83A2FF");
         loginBtn.addMouseListener(this);
 
-        LoginView.addButton(loginAndRegisterPanel, registerBtn, 70, 420, 250, 40, 20, "#7cb9be");
+        LoginView.addButton(loginAndRegisterPanel, registerBtn, 70, 420, 250, 40, 20, "#83A2FF");
         registerBtn.addMouseListener(this);
     }
 
@@ -53,10 +58,24 @@ public class LoginController extends Components implements MouseListener {
         else passwordField.setEchoChar('•');
 
 
+        if(e.getSource() == loginBtn){
+
+
+        }
+
+
+        if(e.getSource() == registerBtn){
+
+            LoginView.removePanelComponents(loginAndRegisterPanel);
+            new RegisterController();
+
+        }
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+
 
     }
 
@@ -67,6 +86,7 @@ public class LoginController extends Components implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        password = new String(passwordField.getPassword());
 
         if(e.getSource() == loginBtn){
             loginBtn.setBounds(45, 360, 300, 50);
@@ -78,15 +98,11 @@ public class LoginController extends Components implements MouseListener {
             registerBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
         }
 
-        if(e.getSource() == userTextField) {
-            userTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.decode("#30cb00")));
-            usernameLb.setForeground(Color.decode("#30cb00"));
-        }
+        if(!password.isEmpty()) passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#30cb00")));
+        else passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 
-        if(e.getSource() == passwordField) {
-            passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.decode("#30cb00")));
-            passwordLb.setForeground(Color.decode("#30cb00"));
-        }
+        if(!userTextField.getText().isEmpty()) userTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#30cb00")));
+        else userTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 
     }
 
@@ -103,15 +119,7 @@ public class LoginController extends Components implements MouseListener {
             registerBtn.setFont(new Font("Monospace", Font.PLAIN, 20));
         }
 
-        if(e.getSource() == userTextField) {
-            userTextField.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.BLACK));
-            usernameLb.setForeground(Color.BLACK);
-        }
-
-        if(e.getSource() == passwordField) {
-            passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.BLACK));
-            passwordLb.setForeground(Color.BLACK);
-        }
-
     }
+
+
 }
