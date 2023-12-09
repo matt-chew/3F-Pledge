@@ -4,7 +4,7 @@ public class DataController {
 
     public static void inputDataToFile (String username,  String password, String name, String lastname){
 
-        Data.storeDatatoFile(username, password, name, lastname);
+        Data.storeDataToFile(username, password, name, lastname);
 
     }
 

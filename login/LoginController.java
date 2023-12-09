@@ -3,6 +3,7 @@ package login;
 import components.Components;
 import register.RegisterController;
 import Database.DataController;
+import maintab.MainTabController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,7 +72,8 @@ public class LoginController extends Components implements MouseListener {
 
                 if (DataController.isExistUser(userTextField.getText(), password)){
 
-                    System.out.println(" You Login ");
+                    LoginView.removeComponents(window);
+                    new MainTabController();
 
                 } else {
                     JOptionPane.showMessageDialog(null, " Wrong Username and Password ", " Info ", JOptionPane.ERROR_MESSAGE);

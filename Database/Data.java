@@ -7,12 +7,16 @@ class Data {
 
     static File  file = new File("usersData.dat");
 
-    static void storeDatatoFile (String username,  String password, String name, String lastname){
+    static void storeDataToFile (String username,  String password, String name, String lastname){
+
+        File studentPaymentData = new File(username + " by " + lastname + ".txt");
 
         try{
            FileWriter writer = new FileWriter(file, true);
 
-           writer.write("1" + "," + username + "," + password + "," + name + "," + lastname + "\n");
+           writer.write("1" + "," + username + "," + password + "," + name + "," + lastname + "," + username + " by " + lastname + ".txt" + "\n");
+
+            studentPaymentData.createNewFile();
 
            writer.close();
 
