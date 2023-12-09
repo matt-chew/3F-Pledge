@@ -1,24 +1,17 @@
-
-import components.Components;
-import login.LoginController;
-
-import maintab.MainTabController;
+package pledge;
 
 import javax.swing.*;
-import java.awt.*;
+import pledge.adminDashboard.*;
+import pledge.components.*;
 
-public class Main extends Components {
-    public static void main(String[] args){
+public class Main extends Components{
+	public static void main(String[] args) {
+		window.setSize(1100,600);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setLayout(null);
+		window.setLocationRelativeTo(null);
+		window.setResizable(false);
 
-        window.setSize(1100, 600);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(null);
-        window.setLocationRelativeTo(null);
-        //window.setResizable(false);
-        window.getContentPane().setBackground(Color.GREEN);
-
-        new MainTabController();
-
-        window.setVisible(true);
-    }
+		new adminController();
+	}
 }
