@@ -2,6 +2,8 @@
 import components.Components;
 import login.LoginController;
 
+import maintab.MainTabController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,10 +14,10 @@ public class Main extends Components {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
         window.setLocationRelativeTo(null);
-        window.setResizable(false);
-        window.getContentPane().setBackground(Color.BLACK);
+        //window.setResizable(false);
+        window.getContentPane().setBackground(Color.GREEN);
 
-        new LoginController();
+        new MainTabController();
 
         window.setVisible(true);
     }
