@@ -2,6 +2,7 @@ package login;
 
 import components.Components;
 import register.RegisterController;
+import Database.DataController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,10 +50,13 @@ public class LoginController extends Components implements MouseListener {
 
         LoginView.addButton(loginAndRegisterPanel, registerBtn, 70, 420, 250, 40, 20, "#83A2FF");
         registerBtn.addMouseListener(this);
+
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        password = new String(passwordField.getPassword());
 
         if(showPasswordCb.isSelected()) passwordField.setEchoChar((char)0);
         else passwordField.setEchoChar('•');
@@ -60,6 +64,21 @@ public class LoginController extends Components implements MouseListener {
 
         if(e.getSource() == loginBtn){
 
+            if (userTextField.getText().isEmpty()) userTextField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+            if (password.isEmpty()) passwordField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+
+            if( !userTextField.getText().isEmpty() && !password.isEmpty() ) {
+
+                if (DataController.isExistUser(userTextField.getText(), password)){
+
+                    System.out.println(" You Login ");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Wrong Username and Password ", " Info ", JOptionPane.ERROR_MESSAGE);
+                    removeText();
+                }
+
+            }
 
         }
 
@@ -89,12 +108,12 @@ public class LoginController extends Components implements MouseListener {
         password = new String(passwordField.getPassword());
 
         if(e.getSource() == loginBtn){
-            loginBtn.setBounds(45, 360, 300, 50);
+            loginBtn.setBounds(45, 355, 300, 50);
             loginBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
         }
 
         if(e.getSource() == registerBtn){
-            registerBtn.setBounds(45, 420, 300, 50);
+            registerBtn.setBounds(45, 415, 300, 50);
             registerBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
         }
 
@@ -121,5 +140,11 @@ public class LoginController extends Components implements MouseListener {
 
     }
 
+    void removeText (){
+
+        userTextField.setText(null);
+        passwordField.setText(null);
+
+    }
 
 }
