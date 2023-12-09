@@ -71,4 +71,5 @@ class LoginView {
         panel.repaint();
         panel.revalidate();
     }
+
 }

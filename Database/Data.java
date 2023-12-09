@@ -5,7 +5,7 @@ import java.io.*;
 
 class Data {
 
-    static File  file = new File("usersData.txt");
+    static File  file = new File("usersData.dat");
 
     static void storeDatatoFile (String username,  String password, String name, String lastname){
 
