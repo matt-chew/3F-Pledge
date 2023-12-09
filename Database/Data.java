@@ -1,14 +1,13 @@
-package Database;
+package PledgeSystem.Database;
 
 import java.util.*;
 import java.io.*;
 
-class Data {
+class Data{
+    static File  file = new File("PledgeSystem\\usersData.txt");
 
-    static File  file = new File("usersData.dat");
-
-    static void storeDatatoFile (String username,  String password, String name, String lastname){
-
+    //Stores user info into file
+    static void storeDataToFile(String username,  String password, String name, String lastname){
         try{
            FileWriter writer = new FileWriter(file, true);
 
@@ -17,11 +16,9 @@ class Data {
            writer.close();
 
         }catch ( IOException ignored ){}
-
     }
-
-    static boolean isExistUser (String username) {
-
+    //Used to prevent users from having the same Username
+    static boolean isExistUser(String username){
         try{
             Scanner scan = new Scanner(file);
 
@@ -33,15 +30,11 @@ class Data {
                 if(parts[1].equals(username)) return true;
 
             }
-
-
         }catch (Exception ignored){}
-
         return false;
     }
-
-    static boolean isExistUser (String username, String password) {
-
+    //Used For Authenticating Login in Login Panel
+    static boolean isExistUser(String username, String password){
         try{
             Scanner scan = new Scanner(file);
 
@@ -50,16 +43,10 @@ class Data {
                 String data = scan.nextLine();
                 String[] parts = data.split(",");
 
-                if(parts[1].equals(username) && parts[2].equals(password)) return true;
+            if(parts[1].equals(username) && parts[2].equals(password)) return true;
 
             }
-
-
         }catch (Exception ignored){}
-
         return false;
     }
-
-
-
 }
