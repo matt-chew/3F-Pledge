@@ -2,6 +2,7 @@ package register;
 
 import components.Components;
 import login.LoginController;
+import Database.DataController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,33 +31,33 @@ public class RegisterController extends Components implements MouseListener {
 
     public RegisterController (){
 
-        RegisterView.addPanel(window, loginAndRegisterPanel, 100, 20, 900, 520, "#e8f3f4");
+        RegisterView.addPanel(window, loginAndRegisterPanel, 640, 20, 400, 520, "#e8f3f4");
 
-        RegisterView.addLabel(loginAndRegisterPanel, registerLogo, 0, 20, 900, 80, 55, true, 1);
-
-
-        RegisterView.addLabel(loginAndRegisterPanel, usernameLb, 80, 115, 300, 50, 20, true, 0);
-        RegisterView.addJTextField(loginAndRegisterPanel, usernameTf, 80, 140, 300, 50, 20);
-        usernameTf.addMouseListener(this);
-
-        RegisterView.addLabel(loginAndRegisterPanel, PasswordLb, 80, 235, 300, 50, 20, true, 0);
-        RegisterView.addJTextField(loginAndRegisterPanel, passwordTf, 80, 260, 300, 50, 20);
-        passwordTf.addMouseListener(this);
+        RegisterView.addLabel(loginAndRegisterPanel, registerLogo, 0, 20, 400, 80, 55, true, 1);
 
 
-        RegisterView.addLabel(loginAndRegisterPanel, nameLb, 510, 115, 300, 50, 20, true, 0);
-        RegisterView.addJTextField(loginAndRegisterPanel, nameTf, 510, 140, 300, 50, 20);
+        RegisterView.addLabel(loginAndRegisterPanel, nameLb, 20, 130, 150, 20, 15, true, 0);
+        RegisterView.addJTextField(loginAndRegisterPanel, nameTf, 20, 140, 150, 50, 20);
         nameTf.addMouseListener(this);
 
-        RegisterView.addLabel(loginAndRegisterPanel, lastNameLb, 510, 235, 300, 50, 20, true, 0);
-        RegisterView.addJTextField(loginAndRegisterPanel, lastnameTf, 510, 260, 300, 50, 20);
+        RegisterView.addLabel(loginAndRegisterPanel, lastNameLb, 210, 130, 150, 20, 15, true, 0);
+        RegisterView.addJTextField(loginAndRegisterPanel, lastnameTf, 210, 140, 150, 50, 20);
         lastnameTf.addMouseListener(this);
 
 
-        RegisterView.addButton(loginAndRegisterPanel, registerBtn, 325, 360, 250, 40, 20, "#83A2FF");
+        RegisterView.addLabel(loginAndRegisterPanel, usernameLb, 20, 220, 350, 20, 15, true, 0);
+        RegisterView.addJTextField(loginAndRegisterPanel, usernameTf, 20, 230, 350, 50, 20);
+        usernameTf.addMouseListener(this);
+
+        RegisterView.addLabel(loginAndRegisterPanel, PasswordLb, 20, 290, 350, 20, 15, true, 0);
+        RegisterView.addJTextField(loginAndRegisterPanel, passwordTf, 20, 300, 350, 50, 20);
+        passwordTf.addMouseListener(this);
+
+
+        RegisterView.addButton(loginAndRegisterPanel, registerBtn, 80, 380, 250, 40, 20, "#83A2FF");
         registerBtn.addMouseListener(this);
 
-        RegisterView.addButton(loginAndRegisterPanel, backBtn, 325, 415, 250, 40, 20, "#83A2FF");
+        RegisterView.addButton(loginAndRegisterPanel, backBtn, 80, 440, 250, 40, 20, "#83A2FF");
         backBtn.addMouseListener(this);
 
     }
@@ -67,13 +68,36 @@ public class RegisterController extends Components implements MouseListener {
 
         if(e.getSource() == registerBtn){
 
+            if (usernameTf.getText().isEmpty()) usernameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+            if (passwordTf.getText().isEmpty()) passwordTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+            if (nameTf.getText().isEmpty()) nameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+            if (lastnameTf.getText().isEmpty()) lastnameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+
+            if( !usernameTf.getText().isEmpty() && !passwordTf.getText().isEmpty()
+                && !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty() ){
+
+                if(!DataController.isExistUser(usernameTf.getText())){
+
+                    DataController.inputDataToFile( usernameTf.getText(), passwordTf.getText(),
+                                                    nameTf.getText(), lastnameTf.getText() );
+
+                    removeText();
+                    JOptionPane.showMessageDialog(null, " Successfully Created Account ", " Successful ", JOptionPane.INFORMATION_MESSAGE);
+                    backToLoginPage();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, " Username Already Taken ", " Info ", JOptionPane.ERROR_MESSAGE);
+                    usernameTf.setText(null);
+                    usernameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
+                }
+
+            }
 
         }
 
         if(e.getSource() == backBtn){
 
-            RegisterView.removePanelComponents(loginAndRegisterPanel);
-            new LoginController();
+            backToLoginPage();
 
         }
 
@@ -104,13 +128,15 @@ public class RegisterController extends Components implements MouseListener {
         if (!lastnameTf.getText().isEmpty()) lastnameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#30cb00")));
         else lastnameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
 
+
+
         if (e.getSource() == registerBtn) {
-            registerBtn.setBounds(300, 360, 300, 50);
+            registerBtn.setBounds(75, 375, 260, 50);
             registerBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
         }
 
         if (e.getSource() == backBtn) {
-            backBtn.setBounds(300, 415, 300, 50);
+            backBtn.setBounds(75, 435, 260, 50);
             backBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
         }
 
@@ -120,15 +146,27 @@ public class RegisterController extends Components implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
         if(e.getSource() == registerBtn){
-            registerBtn.setBounds(325, 360, 250, 40);
+            registerBtn.setBounds(80, 380, 250, 40);
             registerBtn.setFont(new Font("Monospace", Font.PLAIN, 20));
         }
 
         if(e.getSource() == backBtn){
-            backBtn.setBounds(325, 415, 250, 40);
+            backBtn.setBounds(80, 440, 250, 40);
             backBtn.setFont(new Font("Monospace", Font.PLAIN, 20));
         }
 
+    }
+
+    void removeText (){
+        usernameTf.setText(null);
+        passwordTf.setText(null);
+        nameTf.setText(null);
+        lastnameTf.setText(null);
+    }
+
+    void backToLoginPage (){
+        RegisterView.removePanelComponents(loginAndRegisterPanel);
+        new LoginController();
     }
 
 }
