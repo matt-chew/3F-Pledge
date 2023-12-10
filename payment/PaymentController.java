@@ -44,8 +44,6 @@ public class PaymentController extends Components implements MouseListener {
 	JTextField monthTf = new JTextField();
 
 
-
-
 	// receipt Components
 	JPanel receiptPanel = new JPanel();
 
@@ -157,7 +155,7 @@ public class PaymentController extends Components implements MouseListener {
 
 		if(e.getSource() == submitBtn){
 
-			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty() ){
+			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty() && !amount.getText().isEmpty()){
 
 				JOptionPane.showMessageDialog(null, " Payment Successful ", " Payment save ", JOptionPane.INFORMATION_MESSAGE);
 				DataController.inputPayment(filename, nameTf.getText(), lastnameTf.getText(), showSelectedAmount.getText(), dateDisplay.getText().substring(7));
@@ -186,7 +184,7 @@ public class PaymentController extends Components implements MouseListener {
 
 		if(e.getSource() == submitBtn){
 
-			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty() ) {
+			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty()) {
 				nameDisplay.setText("Full Name : " + nameTf.getText() + " " + lastnameTf.getText());
 				payAmountDisplay.setText("Money Input : " + showSelectedAmount.getText());
 				dateDisplay.setText("Date : " + monthTf.getText().substring(0, 2) + "/" + monthTf.getText().substring(2, 4) + "/" + monthTf.getText().substring(4));

@@ -73,7 +73,7 @@ public class LoginController extends Components implements MouseListener {
                 if (DataController.isExistUser(userTextField.getText(), password)){
 
                     LoginView.removeComponents(window);
-                    new MainTabController();
+                    new MainTabController( DataController.getFile(userTextField.getText()) ,userTextField.getText() );
 
                 } else {
                     JOptionPane.showMessageDialog(null, " Wrong Username and Password ", " Info ", JOptionPane.ERROR_MESSAGE);

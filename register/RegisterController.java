@@ -131,13 +131,17 @@ public class RegisterController extends Components implements MouseListener {
 
 
         if (e.getSource() == registerBtn) {
+
             registerBtn.setBounds(75, 375, 260, 50);
             registerBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
+
         }
 
         if (e.getSource() == backBtn) {
+
             backBtn.setBounds(75, 435, 260, 50);
             backBtn.setFont(new Font("Roboto", Font.PLAIN, 40));
+
         }
 
     }
@@ -146,27 +150,35 @@ public class RegisterController extends Components implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
         if(e.getSource() == registerBtn){
+
             registerBtn.setBounds(80, 380, 250, 40);
             registerBtn.setFont(new Font("Monospace", Font.PLAIN, 20));
+
         }
 
         if(e.getSource() == backBtn){
+
             backBtn.setBounds(80, 440, 250, 40);
             backBtn.setFont(new Font("Monospace", Font.PLAIN, 20));
+
         }
 
     }
 
     void removeText (){
+
         usernameTf.setText(null);
         passwordTf.setText(null);
         nameTf.setText(null);
         lastnameTf.setText(null);
+
     }
 
     void backToLoginPage (){
+
         RegisterView.removePanelComponents(loginAndRegisterPanel);
         new LoginController();
+
     }
 
 }
