@@ -1,5 +1,6 @@
 package payment;
 
+import Database.DataController;
 import components.Components;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.sql.SQLOutput;
 
 
 public class PaymentController extends Components implements MouseListener {
+
+	String filename;
 
 	// Payment Components
 	JPanel selectPaymentPanel = new JPanel();
@@ -47,12 +50,14 @@ public class PaymentController extends Components implements MouseListener {
 	JPanel receiptPanel = new JPanel();
 
 	JLabel nameDisplay = new JLabel("Full Name : ");
-	JLabel payAmountDisplay = new JLabel("Date : ");
-	JLabel dateDisplay = new JLabel("Money Input : ");
+	JLabel payAmountDisplay = new JLabel("Money Input : ");
+	JLabel dateDisplay = new JLabel("Date : ");
 
 	JButton submitBtn = new JButton("Submit");
 
-	public PaymentController() {
+	public PaymentController(String filename) {
+
+		this.filename = filename;
 
 		// payment panel
 		PaymentView.addPanelToPanel(divPanel, selectPaymentPanel, 380, 20, 500, 220, "#EEF5FF");
@@ -109,16 +114,24 @@ public class PaymentController extends Components implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 
 		if(e.getSource() == amount1Btn) {
+
 			showSelectedAmount.setText(amount1Btn.getText() + ".00");
 			amount.setText(amount1Btn.getText());
+
 		}
+
 		if(e.getSource() == amount2Btn) {
+
 			showSelectedAmount.setText(amount2Btn.getText() + ".00");
 			amount.setText(amount2Btn.getText());
+
 		}
+
 		if(e.getSource() == amount3Btn) {
+
 			showSelectedAmount.setText(amount3Btn.getText() + ".00");
 			amount.setText(amount3Btn.getText());
+
 		}
 
 		if(!amount.getText().isEmpty()) {
@@ -128,28 +141,28 @@ public class PaymentController extends Components implements MouseListener {
 				if (e.getSource() == inputBtn) showSelectedAmount.setText(amount.getText() + ".00");
 
 			} else {
+
 				amount.setText(null);
 				showSelectedAmount.setText("Input number only !!");
+
 			}
 
 		}
 
 		if( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty() ) nameDisplay.setText("Full Name : " + nameTf.getText() + " " + lastnameTf.getText());
 		if( !showSelectedAmount.getText().isEmpty() ) payAmountDisplay.setText("Money Input : " + showSelectedAmount.getText());
-		if( !monthTf.getText().isEmpty() ) dateDisplay.setText("MM/DD/YY : " + monthTf.getText().substring(0, 2) + "/" + monthTf.getText().substring(2, 4) + "/" + monthTf.getText().substring(4));
-
-		System.out.println(dateDisplay.getText().substring(11));
-		System.out.println(nameDisplay.getText().substring(12));
-		System.out.println(dateDisplay.getText().substring(11));
+		if( !monthTf.getText().isEmpty() ) dateDisplay.setText("Date : " + monthTf.getText().substring(0, 2) + "/" + monthTf.getText().substring(2, 4) + "/" + monthTf.getText().substring(4));
 
 		validationColor();
+
 		if(e.getSource() == submitBtn){
 
 			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty() ){
 
-				//****************************************************************************************************************************************
-				// need logic store data to student file
-				System.out.println("Input data");
+				JOptionPane.showMessageDialog(null, " Payment Successful ", " Payment save ", JOptionPane.INFORMATION_MESSAGE);
+				DataController.inputPayment(filename, nameTf.getText(), lastnameTf.getText(), showSelectedAmount.getText(), dateDisplay.getText().substring(7));
+				clearTextField();
+				textFieldRepaintLineBlack();
 
 			}
 
@@ -170,6 +183,16 @@ public class PaymentController extends Components implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+
+		if(e.getSource() == submitBtn){
+
+			if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()  && !showSelectedAmount.getText().isEmpty() && !monthTf.getText().isEmpty() ) {
+				nameDisplay.setText("Full Name : " + nameTf.getText() + " " + lastnameTf.getText());
+				payAmountDisplay.setText("Money Input : " + showSelectedAmount.getText());
+				dateDisplay.setText("Date : " + monthTf.getText().substring(0, 2) + "/" + monthTf.getText().substring(2, 4) + "/" + monthTf.getText().substring(4));
+			}
+
+		}
 
 	}
 
@@ -203,6 +226,28 @@ public class PaymentController extends Components implements MouseListener {
 
 		if( amount.getText().isEmpty() ) amount.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.RED));
 			else amount.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.GREEN));
+
+	}
+
+	void clearTextField (){
+
+		nameTf.setText(null);
+		lastnameTf.setText(null);
+		showSelectedAmount.setText(null);
+		monthTf.setText(null);
+		amount.setText(null);
+		nameDisplay.setText("Full Name : ");
+		payAmountDisplay.setText("Money Input : ");
+		dateDisplay.setText("Date : ");
+
+	}
+
+	void textFieldRepaintLineBlack (){
+
+		nameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
+		lastnameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
+		monthTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
+		amount.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
 
 	}
 }
