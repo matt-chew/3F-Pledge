@@ -64,7 +64,7 @@ public class LoginController extends Components implements ActionListener{
                 if(DataController.isExistUser(userTextField.getText(), password)){
 
                     LoginView.removePanelComponents(infoPanel);
-                    window.remove(infoPanel);
+                    LoginView.removeComponents(window);
 
                     System.out.println("Login Successful");
                     new DashboardController();

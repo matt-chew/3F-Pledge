@@ -2,17 +2,24 @@ package PledgeSystem.Dashboard;
 
 import PledgeSystem.Components.Components;
 import PledgeSystem.Login.LoginController;
+import PledgeSystem.Payment.PaymentController;
+import PledgeSystem.Scholarship.ScholarshipController;
+import PledgeSystem.Admin.AdminController;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class DashboardController extends Components {
+public class DashboardController extends Components implements ActionListener{
 			JPanel taskbarPanel;
 			JPanel dashboardsPanel, dashboardPanel1,dashboardPanel2, dashboardPanel3,dashboardPanel4,dashboardPanel5,dashboardPanel6,dashboardPanel7;
 			JPanel paymentSummaryPanel, paymentTitlePanel;
-			JButton dateButton;
+			JButton dashboardButton;
 			JButton paymentButton;
+			JButton adminButton;
+			JButton exitButton;
+			JButton scholarshipButton;
+
 			
 		public DashboardController() {
 			
@@ -20,15 +27,30 @@ public class DashboardController extends Components {
 			DashboardView.addLabel(dashBoardLabel, window,  230, 80, 100, 20, "Arial", 14);	
 			
 			JLabel paymentSummaryLabel = new JLabel("Payment Summary");
-			DashboardView.addLabel(paymentSummaryLabel, window,  710, 80, 150, 20, "Arial", 14);	
-			
-			dateButton = new JButton();
-			DashboardView.addButton(dateButton, window, 5, 10, 40, 40);
-			
-			paymentButton = new JButton();
-			DashboardView.addButton(paymentButton, window, 5, 60, 40, 40);
+			DashboardView.addLabel(paymentSummaryLabel, window,  710, 80, 150, 20, "Arial", 14);		
 
-			
+			//Taskbar Button
+       		dashboardButton = new JButton();
+			DashboardView.addButton(window, dashboardButton, 5, 10, 40, 40, 18);
+
+			paymentButton = new JButton();
+			DashboardView.addButton(window, paymentButton, 5, 60, 40, 40, 18);
+			paymentButton.addActionListener(this);
+
+			scholarshipButton = new JButton();
+			DashboardView.addButton(window, scholarshipButton, 5, 110, 40, 40, 18);
+			scholarshipButton.addActionListener(this);
+
+			adminButton = new JButton();
+			DashboardView.addButton(window, adminButton, 5, 160, 40, 40, 18);
+			adminButton.addActionListener(this);
+
+			exitButton = new JButton();
+			DashboardView.addButton(window, exitButton, 5, 510, 40, 40, 18);
+			exitButton.addActionListener(this);
+
+
+			//Panel
 			taskbarPanel = new JPanel();
 			DashboardView.addPanel(taskbarPanel, window, 0, 0, 50, 600);
 			
@@ -79,12 +101,46 @@ public class DashboardController extends Components {
 			
 			paymentSummaryPanel.add(paymentTitlePanel);	
 			
-			DashboardView.addFrameColor(window);
-			
 			dashboardsPanel.setLayout(null);
 			paymentSummaryPanel.setLayout(null);
-			
-		    window.setLayout(null);
-			window.setVisible(true);
+
+		}
+
+		public void actionPerformed(ActionEvent e){
+			if(e.getSource() == scholarshipButton){
+
+				DashboardView.removePanelComponents(dashboardsPanel);
+				DashboardView.removePanelComponents(paymentSummaryPanel);
+				DashboardView.removeComponents(window);
+				System.out.println("Hello");
+				new ScholarshipController();
+			}
+
+			if(e.getSource() == paymentButton){
+
+				DashboardView.removePanelComponents(dashboardsPanel);
+				DashboardView.removePanelComponents(paymentSummaryPanel);
+				DashboardView.removeComponents(window);
+				System.out.println("Hello");
+				new PaymentController();
+			}
+
+			if(e.getSource() == adminButton){
+
+				DashboardView.removePanelComponents(dashboardsPanel);
+				DashboardView.removePanelComponents(paymentSummaryPanel);
+				DashboardView.removeComponents(window);
+				System.out.println("Hello");
+				new AdminController();
+			}
+
+			if(e.getSource() == exitButton){
+
+				DashboardView.removePanelComponents(dashboardsPanel);
+				DashboardView.removePanelComponents(paymentSummaryPanel);
+				DashboardView.removeComponents(window);
+				System.out.println("Hello");
+				new LoginController();
+			}
 		}
 }
