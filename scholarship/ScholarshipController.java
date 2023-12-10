@@ -121,19 +121,19 @@ public class ScholarshipController extends Components{
 			submitButton = new JButton("Submit");
 			scholarshipView.addButton(submitButton, window, 430, 475, 75, 25);
 			
-			dashboardButton = new JButton(dashIcon);
+			dashboardButton = new JButton();
 			scholarshipView.addButton(dashboardButton, window, 5, 10, 40, 40);
 			
-			paymentButton = new JButton(paymentIcon);
+			paymentButton = new JButton();
 			scholarshipView.addButton(paymentButton, window, 5, 60, 40, 40);
 			
-			adminButton = new JButton(adminIcon);
+			adminButton = new JButton();
 			scholarshipView.addButton(adminButton, window, 5, 110, 40, 40);
 			
-			scholarshipButton = new JButton(scholarshipIcon);
-			scholarshipView.addButton(scholarshipButton, windowy, 5, 160, 40, 40);
+			scholarshipButton = new JButton();
+			scholarshipView.addButton(scholarshipButton, window, 5, 160, 40, 40);
 			
-			exitButton = new JButton(exitIcon);
+			exitButton = new JButton();
 			scholarshipView.addButton(exitButton, window, 5, 510, 40, 40);
 			
 			sidePanel = new JPanel();
