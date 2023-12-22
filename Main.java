@@ -1,12 +1,12 @@
-package PledgeSystem;
+package scholarship;
 
-import PledgeSystem.Components.Components;
-import PledgeSystem.Login.LoginController;
+import scholarship.components.Components;
+import scholarship.login.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Main extends Components{
+public class Main extends Components {
     public static void main(String[] args){
 
         window.setSize(1100, 600);
@@ -14,10 +14,12 @@ public class Main extends Components{
         window.setLayout(null);
         window.setLocationRelativeTo(null);
         window.setResizable(false);
-        window.getContentPane().setBackground(Color.decode("#0d0d0d"));
+        window.getContentPane().setBackground(Color.BLACK);
 
         new LoginController();
 
         window.setVisible(true);
+
+
     }
 }
