@@ -36,31 +36,40 @@ public class LoginController extends Components implements MouseListener {
 
     public LoginController (){
 
-        new MainTabController();
+        new MainTabController(); // Display side panel
 
+        // Main panel
         LoginView.addPanel(window, divPanel, 0, 0, 1090, 800, "#EEE2DE");
 
+        /*
+        *   sub panel -> login panel
+        *   login Logo
+        * */
+        LoginView.addLabel(loginPanel, loginLogo, 0, 20, 400, 60, 60, true, 1);
         LoginView.addPanelToPanel(divPanel, loginPanel, 650, 20, 400, 520, "#e8f3f4");
 
-        LoginView.addLabel(loginPanel, loginLogo, 0, 20, 400, 60, 60, true, 1);
-
+        // username
         LoginView.addLabel(loginPanel, usernameLb, 0, 115, 400, 50, 20, true, 0);
         LoginView.addJTextField(loginPanel, userTextField, 45, 140, 300, 50, 20);
         userTextField.addMouseListener(this);
 
+        // password
         LoginView.addLabel(loginPanel, passwordLb, 0, 205, 400, 50, 20, true, 0);
         LoginView.addPasswordField(loginPanel, passwordField, 45, 230, 300, 50, 20);
         passwordField.addMouseListener(this);
 
+        // CheckBox -> Show password
         LoginView.addCheckBox(loginPanel, showPasswordCb, 50, 295);
         showPasswordCb.addMouseListener(this);
 
+        // buttons
         LoginView.addButton(loginPanel, loginBtn, 70, 360, 250, 40, 20, "#83A2FF");
         loginBtn.addMouseListener(this);
 
         LoginView.addButton(loginPanel, registerBtn, 70, 420, 250, 40, 20, "#83A2FF");
         registerBtn.addMouseListener(this);
 
+        // Background Image
         LoginView.addLabel(divPanel, backgroundImage, 0, -100, 1090, 790, 0, false, 0);
     }
 
@@ -69,10 +78,15 @@ public class LoginController extends Components implements MouseListener {
 
         password = new String(passwordField.getPassword());
 
-        if(showPasswordCb.isSelected()) passwordField.setEchoChar((char)0);
-        else passwordField.setEchoChar('•');
+        if(showPasswordCb.isSelected()) passwordField.setEchoChar((char)0); // Convert to string
+        else passwordField.setEchoChar('•'); // Encrypt Password
 
-
+        /*
+        *   Check username, password if empty change Line Color to red to indicate that user need to input username or password
+        *
+        *   Check username && password if exist in Database
+        *
+        * */
         if(e.getSource() == loginBtn){
 
             if (userTextField.getText().isEmpty()) userTextField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));

@@ -2,7 +2,7 @@ package scholarship.maintab;
 
 import scholarship.components.Components;
 import scholarship.login.LoginController;
-import scholarship.teacherlogin.TeacherLoginController;
+import scholarship.teacherLogin.TeacherLoginController;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -10,20 +10,25 @@ import java.awt.event.*;
 public class MainTabController extends Components implements MouseListener {
     
     JPanel sidePanel = new JPanel();
-    
+
+    // student button
     JLabel studentBtn = new JLabel(studentBtnImage);
 
+    // teacher button
     JLabel teacherBtn = new JLabel(teacherBtnImage);
 
 
     public MainTabController (){
 
+        // Sidebar panel
         MainTabView.addPanelToPanel(divPanel, sidePanel, 10, 10, 30, 30, "#EEEDED");
         sidePanel.addMouseListener(this);
 
+        // student button
         MainTabView.addLabel(sidePanel, studentBtn, 0, 40, 200, 40, 15, false, 0);
         studentBtn.addMouseListener(this);
 
+        // teacher button
         MainTabView.addLabel(sidePanel, teacherBtn, 0, 90, 200, 40, 15, false, 0);
         teacherBtn.addMouseListener(this);
 

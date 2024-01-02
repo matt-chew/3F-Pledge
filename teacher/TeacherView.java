@@ -13,24 +13,6 @@ class TeacherView {
         panel.add(textField);
     }
 
-    static void addPasswordField (JPanel panel, JPasswordField passwordField, int x, int y, int width, int height, int sizeText){
-        passwordField.setBounds(x,y,width,height);
-        passwordField.setFont(new Font("monospace", Font.PLAIN, sizeText));
-        passwordField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
-        passwordField.setOpaque(false);
-        panel.add(passwordField);
-    }
-
-    static void addCheckBox (JPanel panel, JCheckBox box, int x, int y){
-        box.setBounds(x,y,140,15);
-        box.setText("Show Password");
-        box.setFont(new Font("Monospace", Font.BOLD, 15));
-        box.setLayout(null);
-        box.setBackground(null);
-        box.setFocusable(false);
-        panel.add(box);
-    }
-
     static void addButton (JPanel panel, JButton button, int x, int y, int width, int height, int sizeFont, String color){
         button.setBounds(x,y,width,height);
         button.setFocusable(false);

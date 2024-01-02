@@ -9,17 +9,7 @@ class StudentFormView {
         textField.setBounds(x,y,width,height);
         textField.setFont(new Font("monospace", Font.PLAIN, sizeText));
         textField.setBorder(null);
-        //textField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
-        //textField.setOpaque(false);
         panel.add(textField);
-    }
-
-    static void addPasswordField (JPanel panel, JPasswordField passwordField, int x, int y, int width, int height, int sizeText){
-        passwordField.setBounds(x,y,width,height);
-        passwordField.setFont(new Font("monospace", Font.PLAIN, sizeText));
-        passwordField.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
-        passwordField.setOpaque(false);
-        panel.add(passwordField);
     }
 
     static void addJComboBox (JPanel panel, JComboBox<String> comboBox, int x, int y, int width, int height){

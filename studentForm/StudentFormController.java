@@ -12,8 +12,6 @@ import java.util.Calendar;
 public class StudentFormController extends Components implements ActionListener {
     
     String username;
-
-    String[] months = {"January", " May", "September", "December"};
     
     private final String[] section = {  "1A", "1B", "1C", "1D", "1E", "1F",
                                         "2A", "2B", "2C", "2D", "2E", "2F",
@@ -52,8 +50,9 @@ public class StudentFormController extends Components implements ActionListener 
         
         this.username = username;
 
-        calendar();
+        calendar(); // display scholarship Available base on month
 
+        // side panel
         StudentFormView.addPanel(window, sideBarPanel, 5, 10, 150, 546, "#31304D");
 
         // dev panel
@@ -96,6 +95,15 @@ public class StudentFormController extends Components implements ActionListener 
 
     public void actionPerformed(ActionEvent e){
 
+        /*
+         *   check Personal details if not empty
+         *
+         *   Store all Personal details to Database
+         *
+         *   Display pop-up Successfully apply for Scholarship
+         *
+         * */
+
         if(e.getSource() == submitBtn){
 
             if ( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty() && getSectionSelected() != null && getBatchSelected() != null && getScholarship() != null){
@@ -109,6 +117,13 @@ public class StudentFormController extends Components implements ActionListener 
             }
 
         }
+
+        /*
+         *   remove all components
+         *
+         *   Display Login Panel
+         *   Display Tab Panel
+         * */
 
         if(e.getSource() == logoutBtn){
 
@@ -150,6 +165,18 @@ public class StudentFormController extends Components implements ActionListener 
         scholarshipJCB.setSelectedIndex(-1);
 
     }
+
+    /*
+    *   Get current Month
+    *
+    *   Sets the specific scholarship based on the given month.
+    *
+    *   January, February, March            -> JayJoe Enterprises Scholarship
+    *   April, May, June                    -> Bacalla Bakery Scholarship
+    *   July, August, September             -> Fund For Bata Scholarship
+    *   October, November, and December     -> JamePaul Engineering Program
+    *
+    * */
 
      void calendar(){
 

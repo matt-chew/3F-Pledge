@@ -1,9 +1,7 @@
 package scholarship.teacher;
 
-
 import scholarship.Database.DataController;
 import scholarship.components.Components;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,24 +41,25 @@ public class TeacherController extends Components implements MouseListener {
         // main panel
         TeacherView.addPanel(window, divPanel, 157, 10, 925, 546, "#161A30");
 
-        // sub panels
-
-        // register Teacher
+        // Add Teacher
         registerTeacherLogo = new JLabel("ADD TEACHER"); registerTeacherLogo.setForeground(Color.WHITE);
         TeacherView.addLabel(registerTeacherPanel, registerTeacherLogo, 0, 0, 300, 60, 30, true, 1);
         TeacherView.addPanelToPanel(divPanel, registerTeacherPanel, 150, 50, 300, 60, "#711DB0");
         registerTeacherPanel.addMouseListener(this);
 
-        // remove teacher or view all teacher
+        // List all Teacher
         listOfTeacherLogo = new JLabel("LIST TEACHERS"); listOfTeacherLogo.setForeground(Color.WHITE);
         TeacherView.addLabel(listOfTeacherPanel, listOfTeacherLogo, 0, 0, 300, 60, 30, true, 1);
         TeacherView.addPanelToPanel(divPanel, listOfTeacherPanel, 450, 50, 300, 60, "#B06161");
         listOfTeacherPanel.addMouseListener(this);
 
-        // sub main panel
+        // sub panel
         TeacherView.addPanelToPanel(divPanel, componentsPanel, 150, 110, 600, 400, "#F2FFE9");
 
-        registerTeacher();
+
+        registerTeacher(); // Display Register Components
+
+        // change background Color
         registerTeacherPanel.setBackground(Color.decode("#F2FFE9"));
         registerTeacherLogo.setForeground(Color.GRAY);
 
@@ -71,13 +70,20 @@ public class TeacherController extends Components implements MouseListener {
 
         if(e.getSource() == createBtn){
 
+            /*
+            *   check name, lastname, username, password Field not empty
+            *
+            *   store account details data to a Database
+            *
+            *   clear all text in the account details
+            * */
             if( !nameTf.getText().isEmpty() && !lastnameTf.getText().isEmpty()
                     && !usernameTf.getText().isEmpty() && !passwordTf.getText().isEmpty() ){
 
                 DataController.inputTeachersData(usernameTf.getText(), passwordTf.getText(), nameTf.getText(), lastnameTf.getText());
                 clearText();
 
-            }else authenticationIsBlank();
+            }else authenticationIsBlank(); // if one of the Blank is empty change Line Color to Red
 
         }
 
@@ -223,9 +229,13 @@ public class TeacherController extends Components implements MouseListener {
 
         jTextAreaDesign();
 
+
+        // get Data from Database and store it in 2D ArrayList
         java.util.List<java.util.List<String>> data = DataController.listOfApplicants( "teachers" );
 
         teachersList.setText(" STATUS" + "\t" + "NAME:" + "\t" + "LASTNAME:" + "\n");
+
+        // Display Data in TeacherList
         for(List<String> row : data){
 
             teachersList.append(" " + row.get(0) + "\t" + row.get(3) + "\t" + row.get(4) + "\n");

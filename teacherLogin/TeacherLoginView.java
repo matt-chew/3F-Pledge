@@ -1,4 +1,4 @@
-package scholarship.teacherlogin;
+package scholarship.teacherLogin;
 
 import javax.swing.*;
 import java.awt.*;

@@ -58,19 +58,4 @@ public class DataController {
 
     }
 
-
-
-
-    public static double getTotalAmountPledge (String filename) {
-
-        return Data.getTotalAmountPledge(filename);
-
-    }
-
-    public static String getFileName (String username) {
-
-        return Data.getFileName(username);
-
-    }
-
 }

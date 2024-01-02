@@ -11,61 +11,73 @@ import java.awt.event.*;
 
 public class RegisterController extends Components implements MouseListener {
 
+    // Background Image
     JLabel backgroundImage = new JLabel(loginAndRegisterImage);
 
+    // Register Panel
+    JLabel registerLogo = new JLabel("Registration");
     JPanel registerPanel = new JPanel();
 
-    JLabel registerLogo = new JLabel("Registration");
-
+    // Username
     JLabel usernameLb = new JLabel("Username");
     JTextField usernameTf = new JTextField();
 
+    // Password
     JLabel PasswordLb = new JLabel("Password");
     JTextField passwordTf = new JTextField();
 
+    // Name
     JLabel nameLb = new JLabel("Name");
     JTextField nameTf = new JTextField();
 
+    // Lastname
     JLabel lastNameLb = new JLabel("Lastname");
     JTextField lastnameTf = new JTextField();
 
+    // buttons
     JButton registerBtn = new JButton("Register");
-
     JButton backBtn = new JButton("Back");
 
     public RegisterController (){
 
+        // Main Panel
         RegisterView.addPanel(window, divPanel, 0, 0, 1090, 800, "#EEE2DE");
 
+        /*
+        *   sub Panel -> RegisterPanel
+        *   Register Logo
+        * */
         RegisterView.addPanelToPanel(divPanel, registerPanel, 650, 20, 400, 520, "#e8f3f4");
-
         RegisterView.addLabel(registerPanel, registerLogo, 0, 20, 400, 80, 55, true, 1);
 
-
+        // Name && NameLabel
         RegisterView.addLabel(registerPanel, nameLb, 20, 130, 150, 20, 15, true, 0);
         RegisterView.addJTextField(registerPanel, nameTf, 20, 140, 150, 50, 20);
         nameTf.addMouseListener(this);
 
+        // Lastname && LastnameLabel
         RegisterView.addLabel(registerPanel, lastNameLb, 210, 130, 150, 20, 15, true, 0);
         RegisterView.addJTextField(registerPanel, lastnameTf, 210, 140, 150, 50, 20);
         lastnameTf.addMouseListener(this);
 
-
+        // Username && UsernameLabel
         RegisterView.addLabel(registerPanel, usernameLb, 20, 220, 350, 20, 15, true, 0);
         RegisterView.addJTextField(registerPanel, usernameTf, 20, 230, 350, 50, 20);
         usernameTf.addMouseListener(this);
 
+        // Password && PasswordLabel
         RegisterView.addLabel(registerPanel, PasswordLb, 20, 290, 350, 20, 15, true, 0);
         RegisterView.addJTextField(registerPanel, passwordTf, 20, 300, 350, 50, 20);
         passwordTf.addMouseListener(this);
 
-
+        // Buttons
         RegisterView.addButton(registerPanel, registerBtn, 80, 380, 250, 40, 20, "#83A2FF");
         registerBtn.addMouseListener(this);
 
         RegisterView.addButton(registerPanel, backBtn, 80, 440, 250, 40, 20, "#83A2FF");
         backBtn.addMouseListener(this);
 
+        // Background Image
         RegisterView.addLabel(divPanel, backgroundImage, 0, -100, 1090, 790, 0, false, 0);
 
     }
@@ -74,6 +86,14 @@ public class RegisterController extends Components implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
+        /*
+        *   Check username, password, name, lastname if empty Change Line Color to Red to indicate the user to write info
+        *
+        *   Verify the username in the database to see if there is a duplicate and then display a pop-up alert advising you to change it.
+        *   Store Account Details to Database and then display pop-up that account successfully created
+        *   Redirect to log-in panel
+        *
+        * */
         if(e.getSource() == registerBtn){
 
             if (usernameTf.getText().isEmpty()) usernameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#e41c23")));
@@ -125,6 +145,8 @@ public class RegisterController extends Components implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
 
+
+        // change style if mouse hover the button
         if (!usernameTf.getText().isEmpty()) usernameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#30cb00")));
         else usernameTf.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.BLACK));
 
@@ -158,6 +180,7 @@ public class RegisterController extends Components implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+        // change style if mouse hover the button
         if(e.getSource() == registerBtn){
 
             registerBtn.setBounds(80, 380, 250, 40);

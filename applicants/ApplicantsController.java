@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ApplicantsController extends Components implements ActionListener {
 
+    // get data from Database
     private final List<List<String>> data = DataController.listOfApplicants( "applicants" );
 
     JLabel[] userRequest;
@@ -38,6 +39,7 @@ public class ApplicantsController extends Components implements ActionListener {
         ApplicantsView.addPanelToPanel(divPanel, applicantList, 100, 50, 700, 450, "#FF90BC");
         ApplicantsView.addJScrollPane(applicantList, scrollPane, 10,50,680,390);
 
+        // resize the table
         if (data.size() <= 3) scrollPane.setBounds(10,100,680,100);
         else if (data.size() > 4) scrollPane.setBounds(10,50,680,390);
 
@@ -45,6 +47,7 @@ public class ApplicantsController extends Components implements ActionListener {
 
     private JPanel createContentPanel() {
 
+        // set array buttons and label dynamic
         userRequest = new JLabel[data.size()];
         acceptBtn = new JButton[data.size()];
         declineBtn = new JButton[data.size()];
@@ -52,10 +55,12 @@ public class ApplicantsController extends Components implements ActionListener {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(data.size(), 3, 10,10));
 
+        // counter for index
         int num = 0;
 
         for(List<String> row : data){
 
+            // Display data
             userRequest[num] = new JLabel(row.get(0) + " " + row.get(1) + " " + row.get(2));
             ApplicantsView.addLabel(panel, userRequest[num], 0, 100, 278, 40, 20, false, 0);
 
@@ -82,10 +87,10 @@ public class ApplicantsController extends Components implements ActionListener {
 
             if (e.getSource() == acceptBtn[num]) {
 
-                String getData = data.get(num).toString();
-                DataController.acceptedScholars(getData.substring(1, getData.length()-1));
-                data.remove(num);
-                DataController.updateFile(data);
+                String getData = data.get(num).toString(); // return value to a string format
+                DataController.acceptedScholars(getData.substring(1, getData.length()-1)); // remove square brackets
+                data.remove(num); // remove from the list
+                DataController.updateFile(data); // update the list
 
                 refresh();
 
@@ -93,8 +98,8 @@ public class ApplicantsController extends Components implements ActionListener {
 
             if(e.getSource() == declineBtn[num]){
 
-                data.remove(num);
-                DataController.updateFile(data);
+                data.remove(num);   // remove from the list
+                DataController.updateFile(data); // update the list
 
                 refresh();
 

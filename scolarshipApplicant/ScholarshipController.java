@@ -7,9 +7,9 @@ import scholarship.login.LoginController;
 import scholarship.maintab.MainTabController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
+
 
 public class ScholarshipController extends Components implements ActionListener{
 
@@ -17,21 +17,22 @@ public class ScholarshipController extends Components implements ActionListener{
     JPanel studentInfoDisplay = new JPanel();
     JLabel studentInfoLogo = new JLabel("STUDENT INFO");
 
+    // Select Grade Level
     JLabel selectGradeLevelLb = new JLabel("GRADE LEVEL");
     private final String[] gradeLevel = {"1", "2", "3"};
     private final JComboBox<String> gradeLevelJCB = new JComboBox<>(gradeLevel);
 
+    // Select Section
     JLabel selectSectionLb = new JLabel("SECTION");
     private final String[] section = {"A", "B", "C", "D", "E", "F"};
     private final JComboBox<String> sectionJCB = new JComboBox<>(section);
 
+    // Display Area
     JTextArea studentInfo = new JTextArea();
     JScrollPane studentScrollPane = new JScrollPane(studentInfo);
 
-
+    // List Button
     JButton listBtn = new JButton("List Student");
-
-
 
     // applicants panel
     JLabel scholar = new JLabel("SCHOLARS");
@@ -39,11 +40,9 @@ public class ScholarshipController extends Components implements ActionListener{
     JTextArea studentScholar = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(studentScholar);
 
-
     // Buttons
-    JButton scholarshipBtn = new JButton("Scholarship");
+    JButton scholarshipBtn = new JButton("Scholars");
     JButton studentInfoBtn = new JButton("Student Info");
-
     JButton logoutBtn = new JButton("Logout");
 
     public ScholarshipController (){
@@ -60,7 +59,7 @@ public class ScholarshipController extends Components implements ActionListener{
         ScholarshipView.addJScrollPane(applicantsPanels, scrollPane, 10,50,580,440);
         displayScholars();
 
-
+        // buttons
         ScholarshipView.addButton(sideBarPanel, scholarshipBtn, 5, 20, 140, 40, 20, "#7C93C3");
         scholarshipBtn.addActionListener(this);
 
@@ -74,8 +73,10 @@ public class ScholarshipController extends Components implements ActionListener{
     public void actionPerformed(ActionEvent e){
 
         if(e.getSource() == scholarshipBtn){
+
             ScholarshipView.removePanelComponents(divPanel);
             new ScholarshipController();
+
         }
 
         if(e.getSource() == studentInfoBtn){
@@ -91,6 +92,9 @@ public class ScholarshipController extends Components implements ActionListener{
 
         }
 
+
+
+        // remove frame, main, sidebar components
         if(e.getSource() == logoutBtn){
 
             ScholarshipView.removePanelComponents(divPanel);
@@ -125,25 +129,36 @@ public class ScholarshipController extends Components implements ActionListener{
 
     }
 
+
+    /*
+    *   get Data from Database
+    *
+    *   Store Data -> scholars
+    *   Display Scholars
+    *
+    * */
     void displayScholars (){
 
         ScholarshipView.jTextAreaDesign(studentScholar, 23);
 
-        List<List<String>> data = DataController.listOfApplicants( "scholars" );
+        List<List<String>> scholars = DataController.listOfApplicants( "scholars" );
 
         studentScholar.setText(" Name" + "\t" + " Lastname" + "\t" + " Section" + "\t" + " Batch" + "\n");
-        for(List<String> row : data){
+        for(List<String> row : scholars){
 
-            if(row.size() > 3) {
-
-                studentScholar.append(row.get(1) + "\t" + row.get(2) + "\t" + row.get(3) + "\t" + row.get(4) + "\n");
-
-            }
+            studentScholar.append(row.get(1) + "\t" + row.get(2) + "\t" + row.get(3) + "\t" + row.get(4) + "\n");
 
         }
 
     }
 
+    /*
+     *   get Data from Database
+     *
+     *   Store Data -> listStudentScholars
+     *   Display all information -> listStudentScholars
+     *
+     * */
     void displayStudentInfo (){
 
         List<List<String>> listStudentScholars = DataController.listOfScholarStudent(  getGradeLevel(), getSection() );
@@ -151,11 +166,7 @@ public class ScholarshipController extends Components implements ActionListener{
         studentInfo.setText(" ID" + "\t" + " NAME" + "\t" + " LASTNAME" + "\t" + " SECTION" + "\t" + " BATCH" + "\t" + " SCHOLAR" + "\n");
         for(List<String> row : listStudentScholars){
 
-            if(row.size() > 3) {
-
-                studentInfo.append(row.get(0) + "\t" + row.get(1) + "\t" + row.get(2) + "\t" + row.get(3) + "\t" + row.get(4) + "\t" + row.get(5) + "\n");
-
-            }
+            studentInfo.append(row.get(0) + "\t" + row.get(1) + "\t" + row.get(2) + "\t" + row.get(3) + "\t" + row.get(4) + "\t" + row.get(5) + "\n");
 
         }
 
@@ -174,6 +185,5 @@ public class ScholarshipController extends Components implements ActionListener{
         return gradeLevelJCB.getItemAt(gradeLevelJCB.getSelectedIndex());
 
     }
-
 
 }
