@@ -4,6 +4,7 @@ import login.LoginController;
 
 import maintab.MainTabController;
 import payment.PaymentController;
+// scholarship.ScholarshipController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class Main extends Components {
         window.setResizable(false);
         window.getContentPane().setBackground(Color.BLACK);
 
-        new LoginController();
+       new LoginController();
 
         window.setVisible(true);
     }

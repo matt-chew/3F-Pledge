@@ -4,6 +4,7 @@ import components.Components;
 import login.LoginController;
 import payment.PaymentController;
 import dashboard.DashboardController;
+//import scholarship.ScholarshipController;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -28,7 +29,6 @@ public class MainTabController extends Components implements MouseListener {
         this.username = username;
 
         MainTabView.addPanel(window, divPanel, 157, 10, 925, 546, "#161A30");
-
 
         MainTabView.addPanel(window, buttonPanel, 5, 10, 150, 546, "#31304D");
 
